@@ -1,14 +1,28 @@
-import requests
+from requests import Session
 from bs4 import BeautifulSoup as bs
 
-url = "http://www.komus.ru/product/65617/"
-# headers = {
-#     'accept': '*/*',
-#     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0'
-# }
+try:
+    articles = open("./art.txt", "r")
+    articles = articles.read()
+    articles = articles.split("\n")
+except FileNotFoundError:
+    print("Файла с артикулами не найдено")
+    raise SystemExit(1)
+if (len(articles) == 1 and articles[0] == ''):
+    print("Файл не содержит артикулов")
+    raise SystemExit(1)
 
-session = requests.Session()
-request = session.get(url)
-soup = bs(request.content, 'html.parser')
-span = soup.find('span', attrs={'class': 'i-fs30 i-fwb'}).text.strip()
-print(span)
+res = open("./res.txt", "a")
+
+session = Session()
+
+for i in range(len(articles)):
+    request = session.get("http://www.komus.ru/product/" + articles[i] + "/")
+    soup = bs(request.content, "html.parser")
+    try:
+        span = soup.find("span", attrs={"class": "i-fs30 i-fwb"}).text.strip()
+        print(articles[i].strip() + " " + span)
+        res.write(articles[i].strip() + " " + span + "\n")
+    except AttributeError:
+        print("Страницы с таким продуктом не существует, либо ценник не найден")
+        res.write(articles[i].strip() + " null\n")

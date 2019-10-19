@@ -7,9 +7,11 @@ try:
     articles = articles.split("\n")
 except FileNotFoundError:
     print("Файла с артикулами не найдено")
+    input('Нажмите Enter, чтобы выйти из программы')
     raise SystemExit(1)
 if (len(articles) == 1 and articles[0] == ''):
     print("Файл не содержит артикулов")
+    input('Нажмите Enter, чтобы выйти из программы')
     raise SystemExit(1)
 
 res = open("./Результат.txt", "a")
@@ -26,3 +28,5 @@ for i in range(len(articles)):
     except AttributeError:
         print("Страницы с таким продуктом не существует, либо ценник не найден")
         res.write(articles[i].strip() + " null\n")
+
+input('Нажмите Enter, чтобы выйти из программы')

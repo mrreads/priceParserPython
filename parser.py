@@ -2,7 +2,7 @@ from requests import Session
 from bs4 import BeautifulSoup as bs
 
 try:
-    articles = open("./art.txt", "r")
+    articles = open("./Артикулы.txt", "r")
     articles = articles.read()
     articles = articles.split("\n")
 except FileNotFoundError:
@@ -12,7 +12,7 @@ if (len(articles) == 1 and articles[0] == ''):
     print("Файл не содержит артикулов")
     raise SystemExit(1)
 
-res = open("./res.txt", "a")
+res = open("./Результат.txt", "a")
 
 session = Session()
 

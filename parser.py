@@ -27,7 +27,7 @@ for i in range(len(articles)):
         print(currentArticle + " " + span)
         res.write(currentArticle + " " + span + "\n")
     except AttributeError:
-        print(currentArticle + " null\n")
+        print(currentArticle + " null")
         res.write(currentArticle + " null\n")
 
 input('Нажмите Enter, чтобы выйти из программы')

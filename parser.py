@@ -23,7 +23,7 @@ for i in range(len(articles)):
     request = session.get("http://www.komus.ru/product/" + articles[i] + "/")
     soup = bs(request.content, "html.parser")
     try:
-        span = soup.find("span", attrs={"class": "i-fs30 i-fwb"}).text.strip()
+        span = soup.find("span", attrs={"class": "i-fs30 i-fwb"}).text.strip().replace(" ", '')
         print(currentArticle + " " + span)
         res.write(currentArticle + " " + span + "\n")
     except AttributeError:

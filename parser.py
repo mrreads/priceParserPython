@@ -17,10 +17,11 @@ if (len(articles) == 1 and articles[0] == ''):
 res = open("./Результат.txt", "a")
 
 session = Session()
+headers = {"accept": "*/*", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0"}
 
 for i in range(len(articles)):
     currentArticle = articles[i].strip()
-    request = session.get("http://www.komus.ru/product/" + articles[i] + "/")
+    request = session.get("http://www.komus.ru/product/" + articles[i] + "/", headers=headers)
     soup = bs(request.content, "html.parser")
     try:
         span = soup.find("span", attrs={"class": "i-fs30 i-fwb"}).text.strip().replace(" ", '')

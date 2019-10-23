@@ -31,5 +31,3 @@ for i in range(len(articles)):
         print(currentArticle + " null")
         res.write(currentArticle + " null\n")
     print("Прочитано ", i + 1, " артикулов из ", len(articles))
-
-input('Нажмите Enter, чтобы выйти из программы')
